@@ -16,7 +16,7 @@ const Sidebar = () => {
 
 
     const navigation = [
-        { name: "Dashboard", href: "/", icon: Home, current: url.startsWith('/')  },
+        { name: "Dashboard", href: "/dashboard", icon: Home, current: url.startsWith('/dashboard')  },
         { name: "Analytics", href: "/analytics", icon: BarChart2 , current: url.startsWith('/analytics')},
         { name: "Organization", href: "/organization", icon: Building2 , current: url.startsWith('/organization')},
         { name: "Projects", href: "/projects", icon: Folder , current: url.startsWith('/projects')},

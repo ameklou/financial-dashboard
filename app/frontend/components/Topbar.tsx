@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import {Link, usePage} from "@inertiajs/react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,10 +10,13 @@ import {
 import {Button } from "./ui/button";
 import {Avatar, AvatarFallback, AvatarImage} from "./ui/avatar";
 import {useSettings} from "@/contexts/settings-context.tsx";
+import React from "react";
 
 
 const Topbar = () => {
     const { settings } = useSettings()
+    const url = usePage().url
+    const pathSegments = url.split("/").filter(Boolean)
 
     return (
         <header className="sticky top-0 z-40 border-b bg-background">
@@ -23,14 +26,14 @@ const Topbar = () => {
                         <Link href="/" className="text-sm font-medium">
                             Home
                         </Link>
-                        {/*{pathSegments.map((segment, index) => (*/}
-                        {/*    <React.Fragment key={segment}>*/}
-                        {/*        <span className="text-muted-foreground">/</span>*/}
-                        {/*        <Link href={`/${pathSegments.slice(0, index + 1).join("/")}`} className="text-sm font-medium">*/}
-                        {/*            {segment.charAt(0).toUpperCase() + segment.slice(1)}*/}
-                        {/*        </Link>*/}
-                        {/*    </React.Fragment>*/}
-                        {/*))}*/}
+                        {pathSegments.map((segment, index) => (
+                            <React.Fragment key={segment}>
+                                <span className="text-muted-foreground">/</span>
+                                <Link href={`/${pathSegments.slice(0, index + 1).join("/")}`} className="text-sm font-medium">
+                                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
+                                </Link>
+                            </React.Fragment>
+                        ))}
                     </nav>
                 </div>
                 <div className="flex items-center gap-4">
@@ -42,10 +45,10 @@ const Topbar = () => {
                                 <Avatar className="h-8 w-8">
                                     <AvatarImage src={settings.avatar} alt={settings.fullName} />
                                     <AvatarFallback>
-                                        {/*{settings.fullName*/}
-                                        {/*    .split(" ")*/}
-                                        {/*    .map((n) => n[0])*/}
-                                        {/*    .join("")}*/}
+                                        {settings.fullName
+                                            .split(" ")
+                                            .map((n) => n[0])
+                                            .join("")}
                                     </AvatarFallback>
                                 </Avatar>
                             </Button>

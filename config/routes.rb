@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "pages/index"
+  get "dashboard", to: "pages#index",as: "dashboard"
   get "inertia-example", to: "inertia_example#index"
   resources :projects, only: :index
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
